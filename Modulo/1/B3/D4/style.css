@@ -1,0 +1,25 @@
+header, footer {
+  text-align: center;
+}
+
+ul {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+nav ul li {
+  display: inline;
+  list-style-type: none;
+  margin: 0 50px;
+}
+
+article {
+  width: 65vw;
+}
+
+aside {
+  float: right;
+  position: sticky;
+  top: 30vh;
+  width: 30vw;
+}
