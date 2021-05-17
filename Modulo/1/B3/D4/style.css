@@ -53,6 +53,7 @@ nav ul li {
 
 article {
   width: 65vw;
+  margin-left: 10px;
   text-align: center;
   border-collapse: collapse
 }
