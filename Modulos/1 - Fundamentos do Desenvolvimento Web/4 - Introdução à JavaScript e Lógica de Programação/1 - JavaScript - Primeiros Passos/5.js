@@ -13,3 +13,11 @@ if (x > 0 && y > 0 && z > 0) {
 } else {
   console.log('Erro: angulos inválidos');
 }
+
+// if (x > 0 && y > 0 && z > 0 && somatorio == 180) {
+//   console.log(true);
+// } else if (x > 0 && y > 0 && z > 0 && somatorio != 180) {
+//   console.log(false);
+// } else {
+// console.log('Erro: angulos inválidos');
+// }
