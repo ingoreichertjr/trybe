@@ -146,3 +146,39 @@ function verifyEnding(word, ending) {
   }
   return true
 }
+
+
+
+// Bonus 1
+
+function romano(string) {
+  string = string.split('')
+  let convertido = []
+  let resultado = 0
+
+  let conversor = {
+    I: 1,
+    V: 5,
+    X: 10,
+    L: 50,
+    C: 100,
+    D: 500,
+    M: 1000
+  }
+
+  for (let index = 0; index < string.length; index += 1) {
+    for ( let i in conversor) {
+      if (string[index] == i) {
+        convertido.push(conversor[i])
+      }
+    }
+  }
+  for (let index = 0; index < convertido.length; index += 1) {
+    if (convertido[index+1] > convertido[index]) {
+      convertido[index+1] = convertido[index+1] - convertido[index]
+    } else {
+      resultado += convertido[index]
+    }
+  }
+  return resultado
+}
