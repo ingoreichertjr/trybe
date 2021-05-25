@@ -27,7 +27,6 @@
 
 
 
-
 // ** Exercicio 3 **
 
 // let n = 5;
@@ -47,9 +46,55 @@
 
 
 
-
 // ** Exercicio 4 **
 
+// let n = 7;
+// let asterisk = '*'
+// let space = ' '
+
+// for (let iSpace = n-1; iSpace >= 0; iSpace -= 1) {
+//   if (iSpace % 2 === 0) {
+//     let line = ''
+//     for (let iAddSpace = 1; iAddSpace <= iSpace/2; iAddSpace += 1) {
+//       line += space
+//     }
+//     for (let index = n; index > iSpace; index -= 1) {
+//       line += asterisk
+//     }
+//     for (let iAddSpace = 1; iAddSpace <= iSpace/2; iAddSpace += 1) {
+//       line += space
+//     }
+//     console.log(line);
+//   }
+// }
+
+
+
+// ** Exercicio 5 **
+
+// let n = 7;
+// let asterisk = '*'
+// let space = ' '
+
+// for (let iSpace = n-1; iSpace >= 0; iSpace -= 1) {
+//   if (iSpace % 2 === 0) {
+//     let line = ''
+//     for (let iAddSpace = 1; iAddSpace <= iSpace/2; iAddSpace += 1) {
+//       line += space
+//     }
+//     for (let index = n; index > iSpace; index -= 1) {
+//       if (index === n || index === iSpace + 1) {
+//         line += asterisk
+//       } else {
+//         line += space
+//       }
+//     }
+//     for (let iAddSpace = 1; iAddSpace <= iSpace/2; iAddSpace += 1) {
+//       line += space
+//     }
+//     console.log(line);
+//   }
+// }
 
 
 
