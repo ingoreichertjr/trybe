@@ -133,6 +133,7 @@ function somatorio(N) {
   return somatorio
 }
 
+
 // Exercicio 7
 
 function verifyEnding(word, ending) {
@@ -146,7 +147,6 @@ function verifyEnding(word, ending) {
   }
   return true
 }
-
 
 
 // Bonus 1

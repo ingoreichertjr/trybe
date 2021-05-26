@@ -73,16 +73,14 @@ Crie uma função que exiba o conteúdo de todas as tags <p> no console.
       fixTitle('Exercício 5.1 - JavaScript')
       
       function pUppercase() {
-        let paragrafos = document.getElementsByTagName('p');
-        for (i of paragrafos) {
+        for (i of document.getElementsByTagName('p')) {
           i.style.textTransform = 'uppercase';
         }
       }
       pUppercase()
 
       function printParagraph() {
-        let paragrafos = document.getElementsByTagName('p');
-        for (i of paragrafos) {
+        for (i of document.getElementsByTagName('p')) {
         console.log(i.innerText);
         }
       }
