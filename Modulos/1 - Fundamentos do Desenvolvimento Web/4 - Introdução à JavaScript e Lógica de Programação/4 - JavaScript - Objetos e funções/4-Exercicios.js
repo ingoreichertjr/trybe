@@ -61,12 +61,12 @@ function palindromo(string) {
 
 function highestIndex(array) {
   let highestNumber = array[0]
-  for (index = 0; index <= array.length; index += 1) {
+  for (index = 0; index < array.length; index += 1) {
     if (array[index] > highestNumber) {
       highestNumber = array[index]
     }
   }
-  for (index = 0; index <= array.length; index += 1) {
+  for (index = 0; index < array.length; index += 1) {
     if (highestNumber === array[index]) {
       return index
     }
@@ -77,12 +77,12 @@ function highestIndex(array) {
 
 function lowestIndex(array) {
   let lowestNumber = array[0]
-  for (index = 0; index <= array.length; index += 1) {
+  for (index = 0; index < array.length; index += 1) {
     if (array[index] < lowestNumber) {
       lowestNumber = array[index]
     }
   }
-  for (index = 0; index <= array.length; index += 1) {
+  for (index = 0; index < array.length; index += 1) {
     if (lowestNumber === array[index]) {
       return index
     }
