@@ -1,10 +1,5 @@
 document.getElementById('header-container').style.backgroundColor = 'green';
 
-// const purple = document.querySelectorAll('.emergency-tasks div h3');
-// for (i of purple) {
-//   i.style.backgroundColor = 'purple';
-// }
-
 for (i of document.querySelectorAll('.emergency-tasks div h3')) {
   i.style.backgroundColor = 'purple';
 }
