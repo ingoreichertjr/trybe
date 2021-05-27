@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="paiDoPai">
+    <div id="pai">
+      <div id="primeiroFilho"></div>
+      <div id="elementoOndeVoceEsta">
+        <div id="primeiroFilhoDoFilho"></div>
+        <div id="segundoEUltimoFilhoDoFilho"></div>
+      </div>
+      Atenção!
+      <div id="terceiroFilho"></div>
+      <div id="quartoEUltimoFilho"></div>
+    </div>
+  </div>
+  <script>
+    console.log(document.getElementById('elementoOndeVoceEsta'));
+
+    document.getElementById('elementoOndeVoceEsta').parentNode.style.backgroundColor = 'red';
+
+    document.getElementById('elementoOndeVoceEsta').firstElementChild.style.backgroundColor = 'blue';
+
+    document.getElementById('elementoOndeVoceEsta').firstElementChild.innerText = 'blue';
+
+    console.log(document.getElementById('pai').firstElementChild);
+
+    console.log(document.getElementById('elementoOndeVoceEsta').previousElementSibling);
+
+    console.log(document.getElementById('elementoOndeVoceEsta').nextSibling);
+
+    console.log(document.getElementById('elementoOndeVoceEsta').nextElementSibling);
+
+    console.log(document.getElementById('pai').children[2]);
+
+    document.getElementById('pai').appendChild(document.createElement('h1')).setAttribute('id', 'heading');
+
+    document.getElementById('elementoOndeVoceEsta').appendChild(document.createElement('p'));
+
+    document.getElementById('elementoOndeVoceEsta').firstElementChild.appendChild(document.createElement('p')).setAttribute('id', 'paragrafo');
+
+    console.log(document.getElementById('paragrafo').parentElement.parentElement.nextElementSibling);
+  </script>
+</body>
+</html>
