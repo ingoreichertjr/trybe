@@ -1,0 +1,35 @@
+body {
+  text-align: center;
+  margin: 0;
+}
+
+.color , .pixel {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border: 1px solid black;
+}
+
+.color {
+  margin-right: 2px;
+}
+
+#palette-button {
+  margin: 5px 0;
+}
+
+.linha {
+  height: 42px;
+}
+
+.pixel {
+  margin: 0;
+}
+
+#inputs {
+  margin-bottom: 6px;
+}
+
+#board-size {
+  width: 35px;
+}
