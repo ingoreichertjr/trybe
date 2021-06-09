@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form action="" method="GET">
+    <fieldset>
+      <p>Nome:</p>
+      <input type="text" id="input-name" name="name" maxlength="40" required>
+      <p>E-mail:</p>
+      <input type="email" id="input-email" name="email" maxlength="50" required>
+      <p>CPF:</p>
+      <input type="text" id="input-cpf" name="cpf" maxlength="11" required>
+      <p>Endereço:</p>
+      <input type="text" id="input-address" name="address" maxlength="200" required>
+      <p>Cidade:</p>
+      <input type="text" id="input-city" name="city" maxlength="28" required>
+      <p>Estado:</p>
+      <select name="state" id="input-state"></select>
+      <p>Tipo:</p>
+      <label for="type-1"><input type="radio" id="type-1" name="type" value="casa" required checked>Casa</label>
+      <label for="type-2"><input type="radio" id="type-2" value="apartamento" name="type" required>Apartamento</label>
+    </fieldset>
+    <fieldset>
+      <p>Resumo do currículo:</p>
+      <textarea name="curriculo" id="curriculo" cols="30" rows="5" maxlength="1000" required></textarea>
+      <p>Cargo:</p>
+      <input type="text" id="role" name="role" maxlength="40" required>
+      <p>Descrição do cargo:</p>
+      <input type="text" id="role-description" name="role-description" maxlength="500" required>
+      <p>Data de início:</p>
+      <input type="text" id="start-date" placeholder="dd/mm/yyyy" maxlength="10">
+    </fieldset>
+    <button type="submit" id="submit">Enviar</button>
+  </form>
+  <div id="dados-form"></div>
+  <script src="script.js"></script>
+</body>
+</html>
