@@ -1,0 +1,27 @@
+{
+  "name": "trybe",
+  "version": "1.0.0",
+  "description": "Work in progress...",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GabrielGaspar447/trybe.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GabrielGaspar447/trybe/issues"
+  },
+  "homepage": "https://github.com/GabrielGaspar447/trybe#readme",
+  "devDependencies": {
+    "eslint": "^7.28.0"
+  },
+  "dependencies": {
+    "eslint-config-trybe-backend": "^1.0.3",
+    "eslint-config-trybe-frontend": "^1.2.1",
+    "eslint-config-trybe-fundamentals": "^1.1.1"
+  }
+}
