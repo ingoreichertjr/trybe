@@ -7,16 +7,16 @@
 //   }
 // }
 
-// const newEmployees = () => {
+// const newEmployees = (param) => {
 //   const employees = {
-//     id1: employeeId('Pedro Guerra'), // Nome: Pedro Guerra -> Chame sua função passando o nome Pedro Guerra como parâmetro, substituindo as aspas
-//     id2: employeeId('Luiza Drumond'), // Nome: Luiza Drumond -> Chame sua função passando o nome Luiza Drumond como parâmetro, substituindo as aspas
-//     id3: employeeId('Carla Paiva'), // Nome: Carla Paiva -> Chame sua função passando o nome Carla Paiva como parâmetro, substituindo as aspas
+//     id1: param('Pedro Guerra'), // Nome: Pedro Guerra -> Chame sua função passando o nome Pedro Guerra como parâmetro, substituindo as aspas
+//     id2: param('Luiza Drumond'), // Nome: Luiza Drumond -> Chame sua função passando o nome Luiza Drumond como parâmetro, substituindo as aspas
+//     id3: param('Carla Paiva'), // Nome: Carla Paiva -> Chame sua função passando o nome Carla Paiva como parâmetro, substituindo as aspas
 //   }
 //   return employees;
 // };
 
-// console.table(newEmployees());
+// console.table(newEmployees(employeeId));
 
 
 // 2
