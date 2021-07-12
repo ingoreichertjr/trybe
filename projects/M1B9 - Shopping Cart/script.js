@@ -55,9 +55,6 @@ const clearCart = document.querySelector('button.empty-cart');
 clearCart.addEventListener('click', cleanCart);
 
 // Req 2, 4, 5 e 7
-const fetchItem = (id) => fetch(`https://api.mercadolibre.com/items/${id}`)
-  .then((r) => r.json());
-
 const addToCart = (item) => {
   const newObj = { sku: item.id, name: item.title, salePrice: item.price };
   const cart = document.querySelector('.cart__items');
@@ -66,6 +63,9 @@ const addToCart = (item) => {
   cartVal().innerHTML = Math.round(newVal * 100) / 100;
   localStorage.cart = cartContainer.innerHTML;
 };
+
+const fetchItem = (id) => fetch(`https://api.mercadolibre.com/items/${id}`)
+  .then((r) => r.json());
 
 const getItem = (e) => {
   const item = e.target.parentElement;
