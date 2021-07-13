@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <form id="form" class="container" action="" method="GET">
+    <fieldset>
+      <input data-validate-field="name" class="form-control" placeholder="Nome" type="text" id="input-name" name="name" maxlength="40" required>
+      <input data-validate-field="email" class="form-control" placeholder="E-mail" type="email" id="input-email" name="email" maxlength="50" required>
+      <input data-validate-field="cpf" class="form-control" placeholder="CPF" type="text" id="input-cpf" name="cpf" maxlength="11" required>
+      <input data-validate-field="address" class="form-control" placeholder="Endereço" type="text" id="input-address" name="address" maxlength="200" required>
+      <input data-validate-field="city" class="form-control" placeholder="Cidade" type="text" id="input-city" name="city" maxlength="28" required>
+      <select class="form-select" name="state" id="input-state"></select>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" id="type-1" name="type" value="casa" required checked>
+        <label class="form-check-label" for="type-1">Casa</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" id="type-2" value="apartamento" name="type" required> 
+        <label class="form-check-label" for="type-2">Apartamento</label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <textarea data-validate-field="resume" class="form-control" placeholder="Resumo do currículo" name="curriculo" id="curriculo" cols="30" rows="5" maxlength="1000" required></textarea>
+      <input data-validate-field="role" class="form-control" placeholder="Cargo" type="text" id="role" name="role" maxlength="40" required>
+      <input data-validate-field="roleD" class="form-control" placeholder="Descrição do cargo" type="text" id="role-description" name="role-description" maxlength="500" required>
+      <input class="form-control" type="date" id="start-date">
+    </fieldset>
+    <button class="btn btn-success" type="submit" id="submit">Enviar</button>
+    <button class="btn btn-danger" type="reset" id="clear">Clear</button>
+  </form>
+  <div id="dados-form" class="container" style="margin-top: 20px;"></div>
+  <script src="node_modules/just-validate/dist/js/just-validate.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

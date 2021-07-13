@@ -1,0 +1,49 @@
+body {
+  font-size: 20px;
+}
+h1 {
+  font-size: 28px;
+  text-align: center;
+}
+h2 {
+  font-size: 24px;
+  text-align: center;
+}
+
+img {
+    width: 100%;
+}
+
+figure {
+    margin: 0 0 50px;
+}
+
+figure:last-of-type {
+  margin: 0;
+}
+
+figcaption {
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    background-color: red;
+    width: 80%;
+    margin: auto;
+  }
+
+  figure {
+    float: left;
+    width: 48%;
+    margin: 0 5px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  body {
+    background-color: yellow;
+    max-width: 50%;
+    margin: auto;
+  }
+}
