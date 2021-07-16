@@ -85,7 +85,9 @@ const getRepos = (url) => {
     .then(response => response.json())
     .then((data) => {
       return data.map((repo) => repo.name);
-    });
+    }).catch(() => {
+      throw new Error('Deu ruim')
+    })
 };
 
 describe('check if api return containt specific repos', () => {
@@ -95,6 +97,9 @@ describe('check if api return containt specific repos', () => {
   it('check for sd-01-week4-5-project-meme-generator repo', async () => {
     await expect(getRepos(api_url)).resolves.toContain('sd-01-week4-5-project-meme-generator')
   })
+  // it('check error', async () => {
+  //   await expect(getRepos(api_url)).rejects.toThrowError('Deu ruim')
+  // })
 })
 
 // 5
