@@ -50,7 +50,7 @@ test('4', () => {
   expect(upper).toHaveBeenCalledTimes(1)
   expect(upper).toHaveBeenCalledWith('BATATA');
 
-  firstL.mockImplementation((string) => string.charAt(string.length - 1))
+  firstL.mockImplementation((string) => string[string.length - 1])
 
   expect(firstL('BATATAz')).toBe('z');
   expect(firstL).toHaveBeenCalled();
