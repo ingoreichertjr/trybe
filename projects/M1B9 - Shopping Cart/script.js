@@ -85,22 +85,35 @@ const createProductList = (arr) => {
   addButtons.forEach((i) => i.addEventListener('click', getItem));
 };
 
-// Código usando async/await:
+// Código tratando erro diretamenta na função:
 const fetchML = async () => {
   const SEARCH_URL = 'https://api.mercadolibre.com/sites/MLB/search?q=computador';
-  const apiReturn = await fetch(SEARCH_URL);
-  const json = await apiReturn.json();
-  createProductList(json.results);
+  try {
+    const response = await fetch(SEARCH_URL);
+    if (!response.ok) {
+      throw new Error(`Couldnt fetch API`)
+    }
+    const json = await response.json();
+    createProductList(json.results);
+  } catch(e) {
+    console.error(e);
+  }
 };
 
-// Código usando .then:
-// const SEARCH_URL = 'https://api.mercadolibre.com/sites/MLB/search?q=computador';
-// const fetchML = () => fetch(SEARCH_URL)
-//   .then((r) => r.json())
-//   .then((r) => createProductList(r.results));
+//Código tratando erro junto da execução (linha 122):
+// const fetchML = async () => {
+//   const SEARCH_URL = 'https://api.mercadolibre.com/sites/MLB/search?q=computador';
+//   const response = await fetch(SEARCH_URL);
+//   if (!response.ok) {
+//     throw new Error(`Couldnt fetch API`)
+//   }
+//   const json = await response.json();
+//   createProductList(json.results);
+// };
 
 // Executores
-fetchML();
+fetchML()
+  // .catch(e => {console.error(e)})
 
 if (localStorage.cart) {
   cartContainer.innerHTML = localStorage.cart;
