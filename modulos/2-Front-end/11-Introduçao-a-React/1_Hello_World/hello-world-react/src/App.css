@@ -1,0 +1,12 @@
+.name {
+  text-align: center;
+  background-color: grey;
+  color: blue;
+  font-weight: 700;
+  margin-top: 0;
+}
+
+.text {
+  text-align: center;
+  color: red;
+}
