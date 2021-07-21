@@ -1,0 +1,16 @@
+.pokedex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  width: 300px;
+  border: 1px solid black;
+}
+
+.pokeInfo {
+  text-align: center;
+}
