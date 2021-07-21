@@ -1,17 +1,16 @@
 import './App.css';
-import List from './components/task-list'
+import List from './components/List'
+import tarefas from './data'
 
-const Task = (value) => {
-  return (
-    <li>{value}</li>
-  );
-}
-
-const arr = ['Dormir', 'Comer', 'Dormir mais']
+// const Task = (value) => {
+//   return (
+//     <li>{value}</li>
+//   );
+// }
 
 function App() {
   return (
-    <List items = {arr}/>
+    <List items={tarefas} />
 
     // <ol>
     //   {arr.map((i) => Task(i))}

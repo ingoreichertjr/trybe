@@ -3,15 +3,9 @@ import React, { Component } from 'react'
 class List extends Component {
   render() {
     const items = this.props.items
-    const task = () => {
-      const listItems = items.map((i) => <li>{i}</li>);
-      console.log(listItems);
-          return (
-            <ol>{listItems}</ol>
-          );
-    }
-
-    return task()
+    const listItems = items.map((i) => <li key={i.tarefa}>{i.tarefa}</li>);
+    console.log(listItems);
+    return <ol>{listItems}</ol>
   }
 }
 
