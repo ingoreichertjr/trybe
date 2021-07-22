@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Pokemon from './Pokemon.jsx'
 
 class Pokedex extends Component {
@@ -10,6 +11,14 @@ class Pokedex extends Component {
       list
     );
   }
+}
+
+Pokedex.propTypes = {
+  pokemons: PropTypes.arrayOf(PropTypes.object),
+}
+
+Pokedex.propDefaults = {
+  pokemons: [],
 }
  
 export default Pokedex;
