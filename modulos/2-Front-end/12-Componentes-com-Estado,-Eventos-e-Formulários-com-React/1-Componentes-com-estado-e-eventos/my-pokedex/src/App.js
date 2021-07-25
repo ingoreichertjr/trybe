@@ -1,16 +1,13 @@
 import './App.css';
 import pokemons from './data/Catalog'
+import Header from './components/Header'
 import Pokedex from './components/Pokedex.jsx';
 
 function App() {
   return (
     <>
-      <header>
-        <h1>Pokedex</h1>
-      </header>
-      <main className='main'>
-        <Pokedex pokemons={pokemons} />
-      </main>
+      <Header />
+      <Pokedex pokemons={pokemons} />
     </>
   );
 }

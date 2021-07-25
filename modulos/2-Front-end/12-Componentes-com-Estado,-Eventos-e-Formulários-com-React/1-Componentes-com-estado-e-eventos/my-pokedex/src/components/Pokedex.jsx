@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './css/Pokedex.css'
 import Pokemon from './Pokemon.jsx'
 import Buttons from './Buttons.jsx';
 
@@ -23,12 +24,12 @@ class Pokedex extends Component {
       filteredPoke: props.pokemons,
     }
 
-    this.functions.changePokemon = this.functions.changePokemon.bind(this);
+    this.functions.nextPoke = this.functions.nextPoke.bind(this);
     this.functions.changeType = this.functions.changeType.bind(this);
   }
 
   functions = {
-    changePokemon() {
+    nextPoke() {
       const { pokeIndex, filteredPoke } = this.state;
 
       pokeIndex === filteredPoke.length - 1 ? this.setState({pokeIndex: 0})
@@ -46,15 +47,25 @@ class Pokedex extends Component {
 
   render() {
     const { pokeIndex, filteredPoke } = this.state
+    const { nextPoke, changeType } = this.functions
     const { pokemons } = this.props
 
+    const allTypes = [...new Set(pokemons.map(i => i.type))];
+    const buttonList = allTypes.map(i => <Buttons key={i} className='type-btn' onClick={changeType}>{i}</Buttons>);
+
     return (
-      <>
+      <main className='main'>
         <div className='pokedex'>
-          <Pokemon pokemon={filteredPoke[pokeIndex]} />
+          <Pokemon className={'type-btn'} pokemon={filteredPoke[pokeIndex]} />
         </div>
-        <Buttons {...this.functions} pokemons={pokemons} status={filteredPoke.length <= 1}/>
-      </>
+        <div>
+          <Buttons className={'type-btn'} onClick={changeType}>All</Buttons>
+          {buttonList}
+        </div>
+        <div>
+          <Buttons className={'next-btn'} onClick={nextPoke} status={filteredPoke.length <= 1}>Next Pokemon!</Buttons>
+        </div>
+      </main>
     );
   }
 }
