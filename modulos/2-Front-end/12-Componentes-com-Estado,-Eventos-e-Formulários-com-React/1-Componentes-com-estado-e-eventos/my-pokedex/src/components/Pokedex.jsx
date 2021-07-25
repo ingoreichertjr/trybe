@@ -20,8 +20,7 @@ class Pokedex extends Component {
 
     this.state = {
       pokeIndex: 0,
-      pokeType: props.pokemons,
-      nextBtn: false,
+      filteredPoke: props.pokemons,
     }
 
     this.functions.changePokemon = this.functions.changePokemon.bind(this);
@@ -30,8 +29,8 @@ class Pokedex extends Component {
 
   functions = {
     changePokemon() {
-      const { pokeIndex, pokeType } = this.state;
-      if (pokeIndex === pokeType.length - 1) {
+      const { pokeIndex, filteredPoke } = this.state;
+      if (pokeIndex === filteredPoke.length - 1) {
         this.setState({pokeIndex: 0})
       } else {
         this.setState({pokeIndex: pokeIndex + 1})
@@ -43,24 +42,25 @@ class Pokedex extends Component {
       const filtered = pokemons.filter(i => i.type === type)
   
       if (filtered.length === 0) {
-        this.setState({pokeType: pokemons, pokeIndex: 0, nextBtn: false})
+        this.setState({filteredPoke: pokemons, pokeIndex: 0})
       } else if (filtered.length === 1) {
-        this.setState({pokeType: pokemons.filter(i => i.type === type), pokeIndex: 0, nextBtn: true})
+        this.setState({filteredPoke: pokemons.filter(i => i.type === type), pokeIndex: 0})
       } else {
-        this.setState({pokeType: pokemons.filter(i => i.type === type), pokeIndex: 0, nextBtn: false})
+        this.setState({filteredPoke: pokemons.filter(i => i.type === type), pokeIndex: 0})
       }
     },
   }
 
   render() {
-    const { pokeIndex, pokeType, nextBtn } = this.state
+    const { pokeIndex, filteredPoke } = this.state
+    const { pokemons } = this.props
 
     return (
       <>
         <div className='pokedex'>
-          <Pokemon pokemon={pokeType[pokeIndex]} />
+          <Pokemon pokemon={filteredPoke[pokeIndex]} />
         </div>
-        <Buttons {...this.functions} pokemons={this.props.pokemons} nextBtn={nextBtn}/>
+        <Buttons {...this.functions} pokemons={pokemons} status={filteredPoke.length <= 1}/>
       </>
     );
   }
