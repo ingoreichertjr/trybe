@@ -1,0 +1,12 @@
+.card {
+  flex: 1 0 300px;
+  display: flex;
+  justify-content: space-evenly;
+  border-radius: 10px;
+  border: 1px solid black;
+  margin: 20px;
+}
+
+.pokeInfo {
+  text-align: center;
+}
