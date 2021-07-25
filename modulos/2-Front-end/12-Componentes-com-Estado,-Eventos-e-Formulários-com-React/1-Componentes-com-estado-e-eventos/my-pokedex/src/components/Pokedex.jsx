@@ -30,24 +30,17 @@ class Pokedex extends Component {
   functions = {
     changePokemon() {
       const { pokeIndex, filteredPoke } = this.state;
-      if (pokeIndex === filteredPoke.length - 1) {
-        this.setState({pokeIndex: 0})
-      } else {
-        this.setState({pokeIndex: pokeIndex + 1})
-      }
+
+      pokeIndex === filteredPoke.length - 1 ? this.setState({pokeIndex: 0})
+        : this.setState({pokeIndex: pokeIndex + 1})
     },
     changeType(evt) {
       const { pokemons } = this.props;
       const type = evt.target.innerText
       const filtered = pokemons.filter(i => i.type === type)
-  
-      if (filtered.length === 0) {
-        this.setState({filteredPoke: pokemons, pokeIndex: 0})
-      } else if (filtered.length === 1) {
-        this.setState({filteredPoke: pokemons.filter(i => i.type === type), pokeIndex: 0})
-      } else {
-        this.setState({filteredPoke: pokemons.filter(i => i.type === type), pokeIndex: 0})
-      }
+
+      type === 'All' ? this.setState({filteredPoke: pokemons, pokeIndex: 0})
+        : this.setState({filteredPoke: filtered, pokeIndex: 0})
     },
   }
 

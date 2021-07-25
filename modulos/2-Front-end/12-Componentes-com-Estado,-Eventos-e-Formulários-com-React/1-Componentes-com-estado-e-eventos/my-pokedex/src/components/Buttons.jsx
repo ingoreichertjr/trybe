@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
 
 class Buttons extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-
-    }
-  }
   render() {
     const { changeType, changePokemon, pokemons, status } = this.props
     const allTypes = [...new Set(pokemons.map(i => i.type))];
