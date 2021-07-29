@@ -38,7 +38,7 @@ class MovieLibrary extends Component {
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
 
-    this.setState({ [name]: value }, () => this.filter());
+    this.setState({ [name]: value });
   }
 
   addMov = (newMovie) => {
