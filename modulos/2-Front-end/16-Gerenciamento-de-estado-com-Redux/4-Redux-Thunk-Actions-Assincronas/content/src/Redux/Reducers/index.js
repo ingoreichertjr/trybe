@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import reducer from "./dogDB";
+import dogDB from "./dogDB";
 
-const rootReducer = combineReducers({ reducer });
+const rootReducer = combineReducers({ dogDB });
 
 export default rootReducer;

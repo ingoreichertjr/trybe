@@ -6,7 +6,7 @@ const initialState = {
   error: '',
 };
 
-function reducer(state = initialState, { type, payload }) {
+function dogDB(state = initialState, { type, payload }) {
   switch (type) {
     case REQUEST_IMAGE:
       return { ...state, isFetching: true };
@@ -19,4 +19,4 @@ function reducer(state = initialState, { type, payload }) {
   }
 }
 
-export default reducer;
+export default dogDB;

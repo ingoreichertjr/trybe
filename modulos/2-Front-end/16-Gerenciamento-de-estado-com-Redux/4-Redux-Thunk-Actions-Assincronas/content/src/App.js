@@ -21,8 +21,8 @@ function App({ isFetching, src, fetchDog }) {
 }
 
 const mapStateToProps = (state) => ({
-  src: state.reducer.imagePath,
-  isFetching: state.reducer.isFetching,
+  src: state.dogDB.imagePath,
+  isFetching: state.dogDB.isFetching,
 });
 
 const mapDispatchToProps = (dispatch) => ({
