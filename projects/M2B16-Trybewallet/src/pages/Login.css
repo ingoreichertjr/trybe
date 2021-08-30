@@ -1,0 +1,44 @@
+.login-container {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+.login-form {
+  border: 1px solid black;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+.login-heading {
+  margin: 40px 50px 0;
+  text-align: center;
+}
+
+.login-email {
+  border-radius: 5px;
+  height: 30px;
+  margin: 30px 50px 5px;
+}
+
+.login-password {
+  border-radius: 5px;
+  height: 30px;
+  margin: 5px 50px;
+}
+
+.login-btn {
+  background-color: rgb(3, 192, 3);
+  border-radius: 5px;
+  color: black;
+  height: 30px;
+  margin: 5px 50px 50px;
+}
+
+.login-btn:disabled {
+  background-color: rgb(168, 168, 168);
+}
