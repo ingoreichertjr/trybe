@@ -1,0 +1,120 @@
+.wallet-loading {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.wallet-header {
+  align-items: center;
+  display: flex;
+  height: 50px;
+  justify-content: space-around;
+}
+
+.wallet-add-form {
+  align-items: center;
+  background-color: rgb(129, 241, 64);
+  display: flex;
+  height: 50px;
+  justify-content: space-evenly;
+}
+
+.wallet-edit-form {
+  align-items: center;
+  background-color: rgb(238, 170, 69);
+  display: flex;
+  height: 50px;
+  justify-content: space-evenly;
+}
+
+.value-input {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  margin: 0 5px;
+}
+
+.value-input input {
+  font-size: 16px;
+  height: 30px;
+  padding: 0;
+  text-align: center;
+  width: 60px;
+}
+
+.currency-input {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  margin: 0 5px;
+}
+
+.currency-input select {
+  height: 30px;
+  width: fit-content;
+}
+
+.method-input {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  margin: 0 5px;
+}
+
+.method-input select {
+  height: 30px;
+  width: fit-content;
+}
+
+.tag-input {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  margin: 0 5px;
+}
+
+.tag-input select {
+  height: 30px;
+  width: fit-content;
+}
+
+.description-input {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  margin: 0 5px;
+}
+
+.description-input input {
+  height: 30px;
+  padding: 0;
+  width: 150px;
+}
+
+.wallet-form-add {
+  height: 30px;
+}
+
+table , th , td {
+  border: 1px solid black;
+}
+
+.wallet-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.wallet-table tr {
+  height: 40px;
+}
+
+.wallet-table tr:first-child {
+  background-color: blanchedalmond;
+}
+
+.wallet-table td {
+  text-align: center;
+}
+
+.wallet-add-error {
+  text-align: center;
+}
