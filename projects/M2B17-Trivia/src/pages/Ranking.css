@@ -1,0 +1,31 @@
+.ranking-container {
+  position: relative;
+}
+
+.ranking-home-btn {
+  left: 3%;
+  position: absolute;
+}
+
+.ranking-heading {
+  text-align: center;
+}
+
+.ranking-list {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.ranking-entry {
+  align-items: center;
+  display: flex;
+  margin: 5px 0;
+  width: 200px;
+}
+
+.ranking-entry img {
+  margin-right: 5px;
+  width: 30px;
+}
+

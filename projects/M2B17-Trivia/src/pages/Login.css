@@ -1,0 +1,57 @@
+.login-container {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+.login-form {
+  border: 1px solid black;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+.login-heading {
+  margin: 40px 50px 0;
+  text-align: center;
+}
+
+.login-email {
+  border-radius: 5px;
+  height: 30px;
+  margin: 30px 50px 5px;
+}
+
+.login-name {
+  border-radius: 5px;
+  height: 30px;
+  margin: 5px 50px;
+}
+
+.login-start-btn {
+  background-color: rgb(3, 192, 3);
+  border-radius: 5px;
+  color: black;
+  height: 30px;
+  margin: 10px 50px 5px;
+}
+
+.login-start-btn:disabled {
+  background-color: rgb(168, 168, 168);
+}
+
+.login-settings-btn {
+  background-color: rgb(19, 209, 209);
+  border-radius: 5px;
+  color: black;
+  height: 30px;
+  margin: 5px 50px 30px;
+}
+
+.login-reg-msg {
+  margin-top: 50px;
+  text-align: center;
+}

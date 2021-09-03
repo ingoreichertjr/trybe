@@ -1,0 +1,26 @@
+.feedback-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.feedback-container p {
+  margin: 5px;
+}
+
+.feedback-text-container {
+  margin: 20px 0 10px;
+  text-align: center;
+}
+
+.feedback-btns-container {
+  display: flex;
+  flex-direction: column;
+  height: 80px;
+  justify-content: space-around;
+}
+
+.feedback-btns-container button {
+  height: 30px;
+  width: 100%;
+}

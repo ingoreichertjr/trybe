@@ -1,0 +1,87 @@
+.token-expired-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.game-header {
+  align-items: center;
+  background-color: rgb(155, 155, 155);
+  display: flex;
+  height: 50px;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.game-header-player-info {
+  align-items: center;
+  display: flex;
+}
+
+.game-header-player-info img {
+  margin-right: 10px;
+  width: 40px;
+}
+
+.game-loading {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.game-container {
+  align-items: center;
+  display: flex;
+  height: 90vh;
+  justify-content: center;
+}
+
+.game-main {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
+.game-question-container {
+  border: 1px solid black;
+  height: 100%;
+  margin-right: 10px;
+  width: 300px;
+}
+
+.game-question-container p {
+  padding: 0 5px;
+}
+
+.game-question-cat {
+  background-color: blanchedalmond;
+  text-align: center;
+}
+
+.game-options-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-evenly;
+  margin-left: 10px;
+}
+
+.game-options-container button {
+  margin: 3px 0;
+}
+
+.correct-answer {
+  border: 3px solid rgb(6, 240, 15);
+}
+
+.wrong-answer {
+  border: 3px solid red;
+}
+
+.game-next-btn {
+  background-color: chartreuse;
+}
+
+.invisible {
+  display: none;
+}
