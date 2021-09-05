@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 function TriviaHeader({ gravatar, name, score }) {
+  console.log('header rendered');
   return (
     <header className="game-header">
       <div className="game-header-player-info">
@@ -23,7 +24,7 @@ const mapStateToProps = (state) => ({
   score: state.game.score,
 });
 
-export default connect(mapStateToProps, null)(TriviaHeader);
+export default connect(mapStateToProps)(TriviaHeader);
 
 TriviaHeader.propTypes = {
   name: PropTypes.string,

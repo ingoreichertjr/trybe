@@ -57,7 +57,7 @@ const disableAndPaint = (correct) => {
 };
 
 // Função que para o timer, chama a de cima, calcula e atualiza o score;
-const handleSelect = ({ value }, question, time, incScore) => {
+const handleSelect = ({ value }, question, time, scoreDspch) => {
   const { correct_answer: correct, difficulty } = question;
   disableAndPaint(correct);
   clearInterval(intervalID);
@@ -69,18 +69,18 @@ const handleSelect = ({ value }, question, time, incScore) => {
     lsData.player.assertions += 1;
     lsData.player.score += basePoints + (time * multiplier);
     localStorage.state = JSON.stringify(lsData);
-    incScore({ score: lsData.player.score, assertions: lsData.player.assertions });
+    scoreDspch({ score: lsData.player.score, assertions: lsData.player.assertions });
   }
 };
 
 function Game(props) {
-  const { tokenExpired, getQs, token, questions, incScore } = props;
+  const { tokenExpired, getQuestionsDspch, token, questions, scoreDspch } = props;
   const [qIndex, setQIndex] = useState(0);
   const [options, setOptions] = useState([]);
   const [time, setTime] = useState(maxTime);
 
   // Effect que faz o fetch das perguntas na API;
-  useEffect(() => { getQs(token); }, [getQs, token]);
+  useEffect(() => { getQuestionsDspch(token); }, [getQuestionsDspch, token]);
   // Effect que manda embaralhar as respostas caso seja do tipo "multiple", esconde o botão "Next" e liga o timer;
   useEffect(() => {
     if (questions.length > 1 && qIndex < questions.length) {
@@ -113,7 +113,7 @@ function Game(props) {
         qIndex={ qIndex }
         time={ time }
         options={ options }
-        incScore={ incScore }
+        scoreDspch={ scoreDspch }
         handleSelect={ handleSelect }
         handleNext={ handleNext }
         setQIndex={ setQIndex }
@@ -129,8 +129,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getQs: (token) => dispatch(getQuestions(token)),
-  incScore: (payload) => dispatch(updateScore(payload)),
+  getQuestionsDspch: (token) => dispatch(getQuestions(token)),
+  scoreDspch: (payload) => dispatch(updateScore(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);
@@ -138,9 +138,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(Game);
 Game.propTypes = {
   tokenExpired: PropTypes.bool,
   token: PropTypes.string,
-  getQs: PropTypes.func.isRequired,
+  getQuestionsDspch: PropTypes.func.isRequired,
   questions: PropTypes.arrayOf(PropTypes.object).isRequired,
-  incScore: PropTypes.func.isRequired,
+  scoreDspch: PropTypes.func.isRequired,
 };
 
 Game.defaultProps = {

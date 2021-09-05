@@ -8,7 +8,7 @@ import { updateRanking } from '../redux/actions';
 
 const assertionsThreshold = 3;
 
-const updateLeaderboard = (name, picture, score, updtRanking) => {
+const updateLeaderboard = (name, picture, score, rankingDspch) => {
   const newEntry = { name, score, picture };
   if (localStorage.ranking) {
     const ranking = JSON.parse(localStorage.ranking);
@@ -17,15 +17,15 @@ const updateLeaderboard = (name, picture, score, updtRanking) => {
   } else {
     localStorage.ranking = JSON.stringify([newEntry]);
   }
-  updtRanking(JSON.parse(localStorage.ranking));
+  rankingDspch(JSON.parse(localStorage.ranking));
 };
 
-function Feedback({ name, picture, score, assertions, updtRanking }) {
+function Feedback({ name, picture, score, assertions, rankingDspch }) {
   const msg = assertions < assertionsThreshold ? 'Podia ser melhor...' : 'Mandou bem!';
 
   useEffect(() => {
-    updateLeaderboard(name, picture, score, updtRanking);
-  }, [name, picture, score, updtRanking]);
+    updateLeaderboard(name, picture, score, rankingDspch);
+  }, [name, picture, score, rankingDspch]);
 
   return (
     <>
@@ -65,7 +65,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  updtRanking: (payload) => dispatch(updateRanking(payload)),
+  rankingDspch: (payload) => dispatch(updateRanking(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Feedback);
@@ -75,5 +75,5 @@ Feedback.propTypes = {
   picture: PropTypes.string.isRequired,
   score: PropTypes.number.isRequired,
   assertions: PropTypes.number.isRequired,
-  updtRanking: PropTypes.func.isRequired,
+  rankingDspch: PropTypes.func.isRequired,
 };

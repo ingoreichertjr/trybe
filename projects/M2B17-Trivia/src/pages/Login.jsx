@@ -5,41 +5,60 @@ import PropTypes from 'prop-types';
 import md5 from 'crypto-js/md5';
 import { getToken } from '../redux/actions';
 import './Login.css';
-import { LoginForm } from '../components';
 
-const initialLoginState = {
-  name: '',
-  email: '',
-};
+const emailRegex = /\S+@\S+\.\S+/;
 
-const handleChange = (setLogin, { name, value }) => {
-  setLogin((state) => ({ ...state, [name]: value }));
-};
-
-const handleGameStart = async (getTok, name, email, history) => {
+const startGame = async (name, email, tokenDspch, history) => {
   const gravatar = `https://www.gravatar.com/avatar/${md5(email).toString()}`;
-  await getTok({ name, email, gravatar });
+  await tokenDspch({ name, email, gravatar });
   history.push('/game');
 };
 
-function Login({ getTok, isFetchingToken }) {
-  const [{ name, email }, setLogin] = useState(initialLoginState);
+function Login({ tokenDspch, isFetchingToken }) {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const history = useHistory();
 
-  if (isFetchingToken) {
-    return <h3 className="login-reg-msg">Registering player...</h3>;
-  }
-
+  if (isFetchingToken) return <h3 className="login-reg-msg">Registering player...</h3>;
   return (
-    <LoginForm
-      name={ name }
-      email={ email }
-      onChange={ handleChange }
-      onClick={ handleGameStart }
-      setLogin={ setLogin }
-      history={ history }
-      getTok={ getTok }
-    />
+    <div className="login-container">
+      <form className="login-form">
+        <h3 className="login-heading">Trivia Login</h3>
+        <input
+          data-testid="input-player-name"
+          className="login-name"
+          type="text"
+          placeholder="Name"
+          value={ name }
+          onChange={ ({ target }) => setName(target.value) }
+        />
+        <input
+          data-testid="input-gravatar-email"
+          className="login-email"
+          type="email"
+          placeholder="Email"
+          value={ email }
+          onChange={ ({ target }) => setEmail(target.value) }
+        />
+        <button
+          data-testid="btn-play"
+          className="login-start-btn"
+          type="button"
+          disabled={ !(name.length > 0 && emailRegex.test(email)) }
+          onClick={ () => startGame(name, email, tokenDspch, history) }
+        >
+          Start Game
+        </button>
+        <button
+          data-testid="btn-settings"
+          className="login-settings-btn"
+          type="button"
+          onClick={ () => history.push('/settings') }
+        >
+          Settings
+        </button>
+      </form>
+    </div>
   );
 }
 
@@ -48,12 +67,12 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getTok: (payload) => dispatch(getToken(payload)),
+  tokenDspch: (payload) => dispatch(getToken(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
 Login.propTypes = {
   isFetchingToken: PropTypes.bool.isRequired,
-  getTok: PropTypes.func.isRequired,
+  tokenDspch: PropTypes.func.isRequired,
 };

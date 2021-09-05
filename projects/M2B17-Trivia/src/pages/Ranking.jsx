@@ -36,4 +36,4 @@ const mapStateToProps = (state) => ({
   ranking: state.game.ranking,
 });
 
-export default connect(mapStateToProps, null)(Ranking);
+export default connect(mapStateToProps)(Ranking);
