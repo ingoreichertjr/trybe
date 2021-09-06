@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { TriviaHeader } from '../components';
 import './Feedback.css';
 import { updateRanking } from '../redux/actions';
 
 const assertionsThreshold = 3;
 
-const updateLeaderboard = (name, picture, score, rankingDspch) => {
+const updateLeaderboard = (name, picture, score, dispatch) => {
   const newEntry = { name, score, picture };
   if (localStorage.ranking) {
     const ranking = JSON.parse(localStorage.ranking);
@@ -17,15 +16,21 @@ const updateLeaderboard = (name, picture, score, rankingDspch) => {
   } else {
     localStorage.ranking = JSON.stringify([newEntry]);
   }
-  rankingDspch(JSON.parse(localStorage.ranking));
+  dispatch(updateRanking(JSON.parse(localStorage.ranking)));
 };
 
-function Feedback({ name, picture, score, assertions, rankingDspch }) {
+function Feedback() {
+  const dispatch = useDispatch();
+  const name = useSelector((state) => state.user.name);
+  const picture = useSelector((state) => state.user.gravatar);
+  const score = useSelector((state) => state.game.score);
+  const assertions = useSelector((state) => state.game.assertions);
+
   const msg = assertions < assertionsThreshold ? 'Podia ser melhor...' : 'Mandou bem!';
 
   useEffect(() => {
-    updateLeaderboard(name, picture, score, rankingDspch);
-  }, [name, picture, score, rankingDspch]);
+    updateLeaderboard(name, picture, score, dispatch);
+  }, [name, picture, score, dispatch]);
 
   return (
     <>
@@ -57,23 +62,4 @@ function Feedback({ name, picture, score, assertions, rankingDspch }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  name: state.user.name,
-  picture: state.user.gravatar,
-  score: state.game.score,
-  assertions: state.game.assertions,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  rankingDspch: (payload) => dispatch(updateRanking(payload)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Feedback);
-
-Feedback.propTypes = {
-  name: PropTypes.string.isRequired,
-  picture: PropTypes.string.isRequired,
-  score: PropTypes.number.isRequired,
-  assertions: PropTypes.number.isRequired,
-  rankingDspch: PropTypes.func.isRequired,
-};
+export default Feedback;

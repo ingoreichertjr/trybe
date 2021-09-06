@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import './Ranking.css';
 
-const renderRankingList = ({ ranking }) => (
+const renderRankingList = (ranking) => (
   ranking.map((entry, index) => (
     <li key={ index } className="ranking-entry">
       <img src={ entry.picture } alt="player-gravatar" />
@@ -18,7 +18,9 @@ const renderRankingList = ({ ranking }) => (
   ))
 );
 
-function Ranking(props) {
+function Ranking() {
+  const ranking = useSelector((state) => state.game.ranking);
+
   return (
     <main className="ranking-container">
       <Link to="/" className="ranking-home-btn">
@@ -26,14 +28,10 @@ function Ranking(props) {
       </Link>
       <h2 className="ranking-heading" data-testid="ranking-title">Leaderboard</h2>
       <ol className="ranking-list">
-        {renderRankingList(props)}
+        {renderRankingList(ranking)}
       </ol>
     </main>
   );
 }
 
-const mapStateToProps = (state) => ({
-  ranking: state.game.ranking,
-});
-
-export default connect(mapStateToProps)(Ranking);
+export default Ranking;

@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 import md5 from 'crypto-js/md5';
 import { getToken } from '../redux/actions';
 import './Login.css';
 
 const emailRegex = /\S+@\S+\.\S+/;
 
-const startGame = async (name, email, tokenDspch, history) => {
+const startGame = async (name, email, dispatch, history) => {
   const gravatar = `https://www.gravatar.com/avatar/${md5(email).toString()}`;
-  await tokenDspch({ name, email, gravatar });
+  await dispatch(getToken({ name, email, gravatar }));
   history.push('/game');
 };
 
-function Login({ tokenDspch, isFetchingToken }) {
+function Login() {
+  const isFetchingToken = useSelector((state) => state.user.isFetchingToken);
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const history = useHistory();
@@ -45,7 +46,7 @@ function Login({ tokenDspch, isFetchingToken }) {
           className="login-start-btn"
           type="button"
           disabled={ !(name.length > 0 && emailRegex.test(email)) }
-          onClick={ () => startGame(name, email, tokenDspch, history) }
+          onClick={ () => startGame(name, email, dispatch, history) }
         >
           Start Game
         </button>
@@ -62,17 +63,4 @@ function Login({ tokenDspch, isFetchingToken }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  isFetchingToken: state.user.isFetchingToken,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  tokenDspch: (payload) => dispatch(getToken(payload)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
-
-Login.propTypes = {
-  isFetchingToken: PropTypes.bool.isRequired,
-  tokenDspch: PropTypes.func.isRequired,
-};
+export default Login;

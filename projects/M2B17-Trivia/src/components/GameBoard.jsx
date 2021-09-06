@@ -10,7 +10,7 @@ const decode = (str) => {
 };
 
 function GameBoard(props) {
-  const { questions, qIndex, time, options, scoreDspch, handleSelect, handleNext,
+  const { questions, qIndex, time, options, dispatch, handleSelect, handleNext,
     setQIndex } = props;
   const question = questions[qIndex];
   const history = useHistory();
@@ -35,7 +35,7 @@ function GameBoard(props) {
                 : `wrong-answer-${wrongs.indexOf(option)}` }
               name="options"
               value={ option }
-              onClick={ ({ target }) => handleSelect(target, question, time, scoreDspch) }
+              onClick={ ({ target }) => handleSelect(target, question, time, dispatch) }
             >
               {decode(option)}
             </button>))}
@@ -57,7 +57,7 @@ export default GameBoard;
 
 GameBoard.propTypes = {
   questions: PropTypes.arrayOf(PropTypes.object).isRequired,
-  scoreDspch: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
   qIndex: PropTypes.number.isRequired,
   time: PropTypes.number.isRequired,
   options: PropTypes.arrayOf(PropTypes.string).isRequired,

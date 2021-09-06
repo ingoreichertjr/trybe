@@ -1,13 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-function TriviaHeader({ gravatar, name, score }) {
-  console.log('header rendered');
+function TriviaHeader() {
+  const name = useSelector((state) => state.user.name);
+  const picture = useSelector((state) => state.user.gravatar);
+  const score = useSelector((state) => state.game.score);
+
   return (
     <header className="game-header">
       <div className="game-header-player-info">
-        <img data-testid="header-profile-picture" src={ gravatar } alt="Gravatar Pic" />
+        <img data-testid="header-profile-picture" src={ picture } alt="Gravatar Pic" />
         <span data-testid="header-player-name">{`Player: ${name}`}</span>
       </div>
       <span>
@@ -18,22 +20,4 @@ function TriviaHeader({ gravatar, name, score }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  name: state.user.name,
-  gravatar: state.user.gravatar,
-  score: state.game.score,
-});
-
-export default connect(mapStateToProps)(TriviaHeader);
-
-TriviaHeader.propTypes = {
-  name: PropTypes.string,
-  gravatar: PropTypes.string,
-  score: PropTypes.number,
-};
-
-TriviaHeader.defaultProps = {
-  gravatar: '',
-  name: '',
-  score: 0,
-};
+export default TriviaHeader;

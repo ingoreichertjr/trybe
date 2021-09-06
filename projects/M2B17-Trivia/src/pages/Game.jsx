@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { TriviaHeader, GameBoard } from '../components';
 import { getQuestions, updateScore } from '../redux/actions';
 import './Game.css';
@@ -57,7 +56,7 @@ const disableAndPaint = (correct) => {
 };
 
 // Função que para o timer, chama a de cima, calcula e atualiza o score;
-const handleSelect = ({ value }, question, time, scoreDspch) => {
+const handleSelect = ({ value }, question, time, dispatch) => {
   const { correct_answer: correct, difficulty } = question;
   disableAndPaint(correct);
   clearInterval(intervalID);
@@ -69,20 +68,23 @@ const handleSelect = ({ value }, question, time, scoreDspch) => {
     lsData.player.assertions += 1;
     lsData.player.score += basePoints + (time * multiplier);
     localStorage.state = JSON.stringify(lsData);
-    scoreDspch({ score: lsData.player.score, assertions: lsData.player.assertions });
+    const payload = { score: lsData.player.score, assertions: lsData.player.assertions };
+    dispatch(updateScore(payload));
   }
 };
 
-function Game(props) {
-  const { tokenExpired, getQuestionsDspch, token, questions, scoreDspch } = props;
+function Game() {
+  const dispatch = useDispatch();
+  const tokenExpired = useSelector((state) => state.game.tokenExpired);
+  const token = useSelector((state) => state.user.token);
+  const questions = useSelector((state) => state.game.questions);
   const [qIndex, setQIndex] = useState(0);
   const [options, setOptions] = useState([]);
   const [time, setTime] = useState(maxTime);
 
-  // Effect que faz o fetch das perguntas na API;
-  useEffect(() => { getQuestionsDspch(token); }, [getQuestionsDspch, token]);
-  // Effect que manda embaralhar as respostas caso seja do tipo "multiple", esconde o botão "Next" e liga o timer;
-  useEffect(() => {
+  useEffect(() => { dispatch(getQuestions(token)); }, [token, dispatch]); // Effect que faz o fetch das perguntas na API;
+
+  useEffect(() => { // Effect que manda embaralhar as respostas caso seja do tipo "multiple", esconde o botão "Next" e liga o timer;
     if (questions.length > 1 && qIndex < questions.length) {
       const { correct_answer: correct, incorrect_answers: wrongs } = questions[qIndex];
       setOptions(['True', 'False']);
@@ -93,15 +95,15 @@ function Game(props) {
       return optionsCleanup(setTime); // cleanup options pra impedir bug em caso de duas boolean seguidas.
     }
   }, [qIndex, questions]);
-  // Effect que desliga o timer e chama a disableAndPaint caso o tempo se esgote;
-  useEffect(() => {
+
+  useEffect(() => { // Effect que desliga o timer e chama a disableAndPaint caso o tempo se esgote;
     if (time <= 0) {
       clearInterval(intervalID);
       disableAndPaint(questions[qIndex].correct_answer);
     }
   }, [time, qIndex, questions]);
-  // Effect pra parar o timer caso o component seja desmontado;
-  useEffect(() => () => clearInterval(intervalID), []);
+
+  useEffect(() => () => clearInterval(intervalID), []); // Effect pra parar o timer caso o component seja desmontado;
 
   if (tokenExpired || !token) return <Redirect to="/" />;
   if (questions.length < 1) return <h3 className="game-loading">Loading questions...</h3>;
@@ -113,7 +115,7 @@ function Game(props) {
         qIndex={ qIndex }
         time={ time }
         options={ options }
-        scoreDspch={ scoreDspch }
+        dispatch={ dispatch }
         handleSelect={ handleSelect }
         handleNext={ handleNext }
         setQIndex={ setQIndex }
@@ -122,28 +124,4 @@ function Game(props) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  tokenExpired: state.game.tokenExpired,
-  token: state.user.token,
-  questions: state.game.questions,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  getQuestionsDspch: (token) => dispatch(getQuestions(token)),
-  scoreDspch: (payload) => dispatch(updateScore(payload)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Game);
-
-Game.propTypes = {
-  tokenExpired: PropTypes.bool,
-  token: PropTypes.string,
-  getQuestionsDspch: PropTypes.func.isRequired,
-  questions: PropTypes.arrayOf(PropTypes.object).isRequired,
-  scoreDspch: PropTypes.func.isRequired,
-};
-
-Game.defaultProps = {
-  tokenExpired: false,
-  token: '',
-};
+export default Game;
