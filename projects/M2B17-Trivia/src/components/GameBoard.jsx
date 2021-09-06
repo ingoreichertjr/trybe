@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router';
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
 // decodifica html entities
@@ -9,9 +10,9 @@ const decode = (str) => {
   return textArea.value;
 };
 
-function GameBoard(props) {
-  const { questions, qIndex, time, options, dispatch, handleSelect, handleNext,
-    setQIndex } = props;
+function GameBoard({ qIndex, time, options, handleSelect, handleNext, setQIndex }) {
+  const dispatch = useDispatch();
+  const questions = useSelector((state) => state.game.questions);
   const question = questions[qIndex];
   const history = useHistory();
 
@@ -56,8 +57,6 @@ function GameBoard(props) {
 export default GameBoard;
 
 GameBoard.propTypes = {
-  questions: PropTypes.arrayOf(PropTypes.object).isRequired,
-  dispatch: PropTypes.func.isRequired,
   qIndex: PropTypes.number.isRequired,
   time: PropTypes.number.isRequired,
   options: PropTypes.arrayOf(PropTypes.string).isRequired,

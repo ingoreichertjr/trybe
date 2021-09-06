@@ -82,9 +82,10 @@ function Game() {
   const [options, setOptions] = useState([]);
   const [time, setTime] = useState(maxTime);
 
-  useEffect(() => { dispatch(getQuestions(token)); }, [token, dispatch]); // Effect que faz o fetch das perguntas na API;
-
-  useEffect(() => { // Effect que manda embaralhar as respostas caso seja do tipo "multiple", esconde o botão "Next" e liga o timer;
+  // Effect que faz o fetch das perguntas na API;
+  useEffect(() => { dispatch(getQuestions(token)); }, [token, dispatch]);
+  // Effect que manda embaralhar as respostas caso seja do tipo "multiple", esconde o botão "Next" e liga o timer;
+  useEffect(() => {
     if (questions.length > 1 && qIndex < questions.length) {
       const { correct_answer: correct, incorrect_answers: wrongs } = questions[qIndex];
       setOptions(['True', 'False']);
@@ -95,15 +96,15 @@ function Game() {
       return optionsCleanup(setTime); // cleanup options pra impedir bug em caso de duas boolean seguidas.
     }
   }, [qIndex, questions]);
-
-  useEffect(() => { // Effect que desliga o timer e chama a disableAndPaint caso o tempo se esgote;
+  // Effect que desliga o timer e chama a disableAndPaint caso o tempo se esgote;
+  useEffect(() => {
     if (time <= 0) {
       clearInterval(intervalID);
       disableAndPaint(questions[qIndex].correct_answer);
     }
   }, [time, qIndex, questions]);
-
-  useEffect(() => () => clearInterval(intervalID), []); // Effect pra parar o timer caso o component seja desmontado;
+  // Effect pra parar o timer caso o component seja desmontado;
+  useEffect(() => () => clearInterval(intervalID), []);
 
   if (tokenExpired || !token) return <Redirect to="/" />;
   if (questions.length < 1) return <h3 className="game-loading">Loading questions...</h3>;
@@ -111,11 +112,9 @@ function Game() {
     <>
       <TriviaHeader />
       <GameBoard
-        questions={ questions }
         qIndex={ qIndex }
         time={ time }
         options={ options }
-        dispatch={ dispatch }
         handleSelect={ handleSelect }
         handleNext={ handleNext }
         setQIndex={ setQIndex }
