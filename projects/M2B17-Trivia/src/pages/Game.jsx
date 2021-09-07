@@ -62,8 +62,8 @@ const handleSelect = ({ value }, question, time, dispatch) => {
   clearInterval(intervalID);
 
   if (value === correct) {
-    const diffArray = ['easy', 'medium', 'hard'];
-    const multiplier = diffArray.indexOf(difficulty) + 1;
+    const diffArray = ['picanha', 'easy', 'medium', 'hard'];
+    const multiplier = diffArray.indexOf(difficulty);
     const lsData = JSON.parse(localStorage.state);
     lsData.player.assertions += 1;
     lsData.player.score += basePoints + (time * multiplier);
