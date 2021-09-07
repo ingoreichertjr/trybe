@@ -16,39 +16,37 @@ function GameBoard({ qIndex, time, options, handleSelect, handleNext, setQIndex 
   const question = questions[qIndex];
   const history = useHistory();
 
-  const { category, question: query, correct_answer: correct,
-    incorrect_answers: wrongs } = question;
+  const { category, question: query } = question;
 
   return (
     <div className="game-container">
       <main className="game-main">
-        <div className="game-question-container">
-          <p className="game-question-cat" data-testid="question-category">{category}</p>
-          <p data-testid="question-text">{decode(query)}</p>
-          <p>{`Time remaining: ${time}`}</p>
+        <div className="questions-and-options-container">
+          <div className="game-question-container">
+            <p className="game-question-cat">{category}</p>
+            <p>{decode(query)}</p>
+            <p>{`Time remaining: ${time}`}</p>
+          </div>
+          <div className="game-options-container">
+            {options.map((option) => (
+              <button
+                key={ option }
+                type="button"
+                name="options"
+                value={ option }
+                onClick={ ({ target }) => handleSelect(target, question, time, dispatch) }
+              >
+                {decode(option)}
+              </button>))}
+          </div>
         </div>
-        <div className="game-options-container">
-          {options.map((option) => (
-            <button
-              key={ option }
-              type="button"
-              data-testid={ option === correct ? 'correct-answer'
-                : `wrong-answer-${wrongs.indexOf(option)}` }
-              name="options"
-              value={ option }
-              onClick={ ({ target }) => handleSelect(target, question, time, dispatch) }
-            >
-              {decode(option)}
-            </button>))}
-          <button
-            type="button"
-            data-testid="btn-next"
-            className="game-next-btn invisible"
-            onClick={ () => handleNext(questions, qIndex, setQIndex, history) }
-          >
-            Next
-          </button>
-        </div>
+        <button
+          type="button"
+          className="game-next-btn invisible"
+          onClick={ () => handleNext(questions, qIndex, setQIndex, history) }
+        >
+          Next
+        </button>
       </main>
     </div>
   );

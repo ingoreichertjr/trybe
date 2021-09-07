@@ -26,7 +26,6 @@ function Login() {
       <form className="login-form">
         <h3 className="login-heading">Trivia Login</h3>
         <input
-          data-testid="input-player-name"
           className="login-name"
           type="text"
           placeholder="Name"
@@ -34,7 +33,6 @@ function Login() {
           onChange={ ({ target }) => setName(target.value) }
         />
         <input
-          data-testid="input-gravatar-email"
           className="login-email"
           type="email"
           placeholder="Email"
@@ -42,7 +40,6 @@ function Login() {
           onChange={ ({ target }) => setEmail(target.value) }
         />
         <button
-          data-testid="btn-play"
           className="login-start-btn"
           type="button"
           disabled={ !(name.length > 0 && emailRegex.test(email)) }
@@ -51,7 +48,6 @@ function Login() {
           Start Game
         </button>
         <button
-          data-testid="btn-settings"
           className="login-settings-btn"
           type="button"
           onClick={ () => history.push('/settings') }

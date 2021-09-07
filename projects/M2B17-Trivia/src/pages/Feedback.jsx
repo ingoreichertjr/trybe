@@ -37,24 +37,24 @@ function Feedback() {
       <TriviaHeader />
       <main className="feedback-container">
         <div className="feedback-text-container">
-          <h3 data-testid="feedback-text">{msg}</h3>
+          <h3>{msg}</h3>
           <p>
             Você acertou&nbsp;
-            <span data-testid="feedback-total-question">{assertions}</span>
+            <span>{assertions}</span>
             &nbsp;questões!
           </p>
           <p>
             Um total de&nbsp;
-            <span data-testid="feedback-total-score">{score}</span>
+            <span>{score}</span>
             &nbsp;pontos!
           </p>
         </div>
         <div className="feedback-btns-container">
           <Link to="/">
-            <button data-testid="btn-play-again" type="button">Play again!</button>
+            <button type="button">Play again!</button>
           </Link>
           <Link to="/ranking">
-            <button data-testid="btn-ranking" type="button">Leaderboard</button>
+            <button type="button">Leaderboard</button>
           </Link>
         </div>
       </main>

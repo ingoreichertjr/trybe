@@ -8,9 +8,9 @@ const renderRankingList = (ranking) => (
     <li key={ index } className="ranking-entry">
       <img src={ entry.picture } alt="player-gravatar" />
       <span>
-        <span data-testid={ `player-name-${index}` }>{entry.name}</span>
+        <span>{entry.name}</span>
         &nbsp;-&nbsp;
-        <span data-testid={ `player-score-${index}` }>{entry.score}</span>
+        <span>{entry.score}</span>
         <span>&nbsp;pontos</span>
       </span>
 
@@ -24,9 +24,9 @@ function Ranking() {
   return (
     <main className="ranking-container">
       <Link to="/" className="ranking-home-btn">
-        <button data-testid="btn-go-home" type="button">Home</button>
+        <button type="button">Home</button>
       </Link>
-      <h2 className="ranking-heading" data-testid="ranking-title">Leaderboard</h2>
+      <h2 className="ranking-heading">Leaderboard</h2>
       <ol className="ranking-list">
         {renderRankingList(ranking)}
       </ol>

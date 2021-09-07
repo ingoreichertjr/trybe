@@ -1,5 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import trivia from '../trivia.png';
+import './TriviaHeader.css';
 
 function TriviaHeader() {
   const name = useSelector((state) => state.user.name);
@@ -9,12 +11,13 @@ function TriviaHeader() {
   return (
     <header className="game-header">
       <div className="game-header-player-info">
-        <img data-testid="header-profile-picture" src={ picture } alt="Gravatar Pic" />
-        <span data-testid="header-player-name">{`Player: ${name}`}</span>
+        <img src={ picture } alt="Gravatar Pic" />
+        <span>{`Player: ${name}`}</span>
       </div>
+      <img className="trivia-logo" src={ trivia } alt="Trivia-Logo" />
       <span>
         Score:&nbsp;
-        <span data-testid="header-score">{ score }</span>
+        <span>{ score }</span>
       </span>
     </header>
   );
