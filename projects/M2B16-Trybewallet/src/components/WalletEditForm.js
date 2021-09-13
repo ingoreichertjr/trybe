@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { editExpense, updateTotal } from '../actions';
 import { Input, Select, Button } from './form-components';
 
 const methods = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
 const tags = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
 
-const editExp = ({ edtExpense, updtTotal }, inputs) => {
-  edtExpense(inputs);
-  updtTotal();
+const editExp = (dispatch, inputs) => {
+  dispatch(editExpense(inputs));
+  dispatch(updateTotal());
 };
 
 const handleChange = (setInputs, { id, value }) => {
@@ -17,11 +17,11 @@ const handleChange = (setInputs, { id, value }) => {
   setInputs((state) => ({ ...state, [key]: value }));
 };
 
-function WalletEditForm(props) {
-  const { expensesList, id, currencies } = props;
+function WalletEditForm({ id, currencies }) {
+  const dispatch = useDispatch();
+  const expensesList = useSelector((state) => state.wallet.expenses);
   const expense = expensesList.find((exp) => exp.id === id);
   const [inputs, setInputs] = useState(expense);
-
   return (
     <form className="wallet-edit-form">
       <Input
@@ -62,28 +62,15 @@ function WalletEditForm(props) {
       <Button
         text="Editar despesa"
         classN="wallet-form-add"
-        onClick={ () => editExp(props, inputs) }
+        onClick={ () => editExp(dispatch, inputs) }
       />
     </form>
   );
 }
 
-const mapStateToProps = (state) => ({
-  expensesList: state.wallet.expenses,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  edtExpense: (payload) => dispatch(editExpense(payload)),
-  updtTotal: () => dispatch(updateTotal()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(WalletEditForm);
+export default WalletEditForm;
 
 WalletEditForm.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
-  expensesList: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.object),
-    PropTypes.arrayOf(PropTypes.string),
-  ]).isRequired,
   id: PropTypes.number.isRequired,
 };

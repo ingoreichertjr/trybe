@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addExpen, updateTotal } from '../actions';
 import { Input, Select, Button } from './form-components';
 
@@ -15,13 +14,13 @@ const initialInputState = {
   description: '',
 };
 
-const addExpense = async ({ expensesList, addExp, updtTotal }, setState, state) => {
+const addExpense = async (dispatch, expensesList, setState, state) => {
   const payload = {
     id: expensesList.length === 0 ? 0 : expensesList[expensesList.length - 1].id + 1,
     ...state,
   };
-  await addExp(payload);
-  updtTotal();
+  await dispatch(addExpen(payload));
+  dispatch(updateTotal());
   setState(initialInputState);
 };
 
@@ -30,10 +29,11 @@ const handleChange = (setInputs, { id, value }) => {
   setInputs((state) => ({ ...state, [key]: value }));
 };
 
-function WalletAddForm(props) {
-  const { currencies } = props;
+function WalletAddForm() {
+  const dispatch = useDispatch();
+  const currencies = useSelector((state) => state.wallet.currencies);
+  const expensesList = useSelector((state) => state.wallet.expenses);
   const [inputs, setInputs] = useState(initialInputState);
-
   return (
     <form className="wallet-add-form">
       <Input
@@ -74,23 +74,10 @@ function WalletAddForm(props) {
       <Button
         text="Adicionar despesa"
         classN="wallet-form-add"
-        onClick={ () => addExpense(props, setInputs, inputs) }
+        onClick={ () => addExpense(dispatch, expensesList, setInputs, inputs) }
       />
     </form>
   );
 }
 
-const mapStateToProps = (state) => ({
-  expensesList: state.wallet.expenses,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  addExp: (payload) => dispatch(addExpen(payload)),
-  updtTotal: () => dispatch(updateTotal()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(WalletAddForm);
-
-WalletAddForm.propTypes = {
-  currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
-};
+export default WalletAddForm;

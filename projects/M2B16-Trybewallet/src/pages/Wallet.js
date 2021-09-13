@@ -1,15 +1,17 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { WalletHeader, WalletAddForm, WalletEditForm,
   ExpensesTable } from '../components';
 import './Wallet.css';
 import { fetchCurrencies } from '../actions';
 
-function Wallet({ editMode, currencyList, getCurrencies }) {
+function Wallet() {
+  const dispatch = useDispatch();
+  const currencyList = useSelector((state) => state.wallet.currencies);
+  const editMode = useSelector((state) => state.wallet.editMode);
   useEffect(() => {
-    getCurrencies();
-  }, [getCurrencies]);
+    dispatch(fetchCurrencies());
+  }, [dispatch]);
 
   // if (currencyList.length === 0) {
   //   return (
@@ -38,32 +40,10 @@ function Wallet({ editMode, currencyList, getCurrencies }) {
   return (
     <>
       <WalletHeader />
-      <WalletAddForm currencies={ currencyList } />
+      <WalletAddForm />
       <ExpensesTable />
     </>
   );
 }
 
-const mapStateToProps = (state) => ({
-  currencyList: state.wallet.currencies,
-  editMode: state.wallet.editMode,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  getCurrencies: () => dispatch(fetchCurrencies()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Wallet);
-
-Wallet.propTypes = {
-  editMode: PropTypes.shape({
-    status: PropTypes.bool,
-    id: PropTypes.number,
-  }),
-  currencyList: PropTypes.arrayOf(PropTypes.string).isRequired,
-  getCurrencies: PropTypes.func.isRequired,
-};
-
-Wallet.defaultProps = {
-  editMode: { status: false, id: 9999 },
-};
+export default Wallet;

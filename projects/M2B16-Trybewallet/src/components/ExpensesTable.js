@@ -1,21 +1,21 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
 import { deleteExpense, editMode, updateTotal } from '../actions';
 
-const delExpense = (expenseId, expenses, delExp, updtTotal) => {
+const delExpense = (expenseId, expenses, dispatch) => {
   const filteredExpenses = expenses.filter((e) => e.id !== expenseId);
-  delExp(filteredExpenses);
-  updtTotal();
+  dispatch(deleteExpense(filteredExpenses));
+  dispatch(updateTotal());
 };
 
-const editExpense = (expenseId, toggleEdit) => {
-  toggleEdit({ status: true, id: expenseId });
+const editExpense = (expenseId, dispatch) => {
+  dispatch(editMode({ status: true, id: expenseId }));
 };
 
-const renderExpenses = (props) => {
-  const { expenses: exp, delExp, updtTotal, toggleEdit, editStatus = {} } = props;
-  return exp.map(({ id, description, tag, method, value, currency, exchangeRates }) => {
+const renderExpenses = (dispatch, expenses, editStatus) => (
+  expenses.map((exp) => {
+    const { id, description, tag, method, value, currency, exchangeRates } = exp;
     const val = parseFloat(value);
     const ask = parseFloat(exchangeRates[currency].ask);
     return (
@@ -33,7 +33,7 @@ const renderExpenses = (props) => {
             type="button"
             data-testid="edit-btn"
             disabled={ editStatus.status }
-            onClick={ () => editExpense(id, toggleEdit) }
+            onClick={ () => editExpense(id, dispatch) }
           >
             <AiFillEdit />
           </button>
@@ -41,17 +41,17 @@ const renderExpenses = (props) => {
             type="button"
             data-testid="delete-btn"
             disabled={ editStatus.status }
-            onClick={ () => delExpense(id, exp, delExp, updtTotal) }
+            onClick={ () => delExpense(id, expenses, dispatch) }
           >
             <AiFillDelete />
           </button>
         </td>
       </tr>
     );
-  });
-};
+  })
+);
 
-const renderErrorMessage = ({ error }) => {
+const renderErrorMessage = (error) => {
   if (error) {
     return (
       <h3 className="wallet-add-error">
@@ -62,7 +62,12 @@ const renderErrorMessage = ({ error }) => {
   }
 };
 
-function ExpensesTable(props) {
+function ExpensesTable() {
+  const dispatch = useDispatch();
+  const expenses = useSelector((state) => state.wallet.expenses);
+  const editStatus = useSelector((state) => state.wallet.editMode);
+  const error = useSelector((state) => state.wallet.error);
+
   return (
     <>
       <table className="wallet-table">
@@ -78,24 +83,12 @@ function ExpensesTable(props) {
             <th>Moeda de conversão</th>
             <th>Editar/Excluir</th>
           </tr>
-          { renderExpenses(props) }
+          { renderExpenses(dispatch, expenses, editStatus) }
         </tbody>
       </table>
-      { renderErrorMessage(props) }
+      { renderErrorMessage(error) }
     </>
   );
 }
 
-const mapStateToProps = (state) => ({
-  expenses: state.wallet.expenses,
-  editStatus: state.wallet.editMode,
-  error: state.wallet.error,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  delExp: (payload) => dispatch(deleteExpense(payload)),
-  updtTotal: () => dispatch(updateTotal()),
-  toggleEdit: (payload) => dispatch(editMode(payload)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ExpensesTable);
+export default ExpensesTable;

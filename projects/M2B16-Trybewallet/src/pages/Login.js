@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { registerUser } from '../actions';
 import './Login.css';
 
@@ -17,7 +16,9 @@ const handleChange = (setLogin, { type, value }) => {
   setLogin((state) => ({ ...state, [type]: value }));
 };
 
-function Login({ loginStatus, regUser }) {
+function Login() {
+  const loginStatus = useSelector((state) => state.user.email);
+  const dispatch = useDispatch();
   const [{ email, password }, setLogin] = useState(initialLoginState);
   const btnStatus = !(emailRegex.test(email) && password.length >= passwordMinLength);
 
@@ -47,7 +48,7 @@ function Login({ loginStatus, regUser }) {
           className="login-btn"
           type="button"
           disabled={ btnStatus }
-          onClick={ () => regUser(email) }
+          onClick={ () => dispatch(registerUser(email)) }
         >
           Entrar
         </button>
@@ -56,17 +57,4 @@ function Login({ loginStatus, regUser }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  loginStatus: state.user.email,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  regUser: (payload) => dispatch(registerUser(payload)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
-
-Login.propTypes = {
-  loginStatus: PropTypes.string.isRequired,
-  regUser: PropTypes.func.isRequired,
-};
+export default Login;

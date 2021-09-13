@@ -1,8 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-function WalletHeader({ userEmail, total }) {
+function WalletHeader() {
+  const userEmail = useSelector((state) => state.user.email);
+  const total = useSelector((state) => state.wallet.total);
   return (
     <header className="wallet-header">
       <span data-testid="email-field">{`Email: ${userEmail}`}</span>
@@ -12,18 +13,4 @@ function WalletHeader({ userEmail, total }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  userEmail: state.user.email,
-  total: state.wallet.total,
-});
-
-export default connect(mapStateToProps, null)(WalletHeader);
-
-WalletHeader.propTypes = {
-  userEmail: PropTypes.string.isRequired,
-  total: PropTypes.number,
-};
-
-WalletHeader.defaultProps = {
-  total: 0,
-};
+export default WalletHeader;
