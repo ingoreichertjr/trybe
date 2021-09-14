@@ -1,0 +1,25 @@
+.signal {
+  width: 300px;
+}
+
+.car-right {
+  transform: translateX(200px);
+  width: 100px;
+  user-select: none;
+}
+
+.car-left {
+  width: 100px;
+  user-select: none;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-around;
+  width: 300px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+}
