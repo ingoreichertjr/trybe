@@ -1,0 +1,34 @@
+* {
+  box-sizing: border-box;
+  font-family: Montserrat , sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+
+  --primary: #f66c46;
+
+  --secondary: #361409;
+
+  --tertiary: rgb(0, 0, 10);
+
+  --background: #373664;
+}
+
+.red-border {
+  border: 1px solid red;
+}
+
+.green-border {
+  border: 1px solid green;
+}
+
+
+.correct-btn {
+  border: 3px solid rgb(6, 240, 15);
+}
+
+.incorrect-btn {
+  border: 3px solid red;
+}
